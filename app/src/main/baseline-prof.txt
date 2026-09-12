@@ -1,0 +1,62 @@
+# Curated baseline profile for Tmusic (fork of Metrolist).
+# Applied via androidx.profileinstaller at install time to cut cold-start
+# on 2-3GB reference devices. This is a hand-authored starting point — it
+# should be replaced by measurements from a macrobenchmark baseline-profile
+# module when a dedicated benchmark device is available.
+#
+# Rule syntax: 'L<package/path>.<Class>;' matches every method of the class.
+
+# --- Application / entry point ---
+Lcom/metrolist/music/App;
+Lcom/metrolist/music/MainActivity;
+Lcom/metrolist/music/ui/screens/NavigationBuilder;
+
+# --- Theme & typography (startup composition) ---
+Lcom/metrolist/music/ui/theme/ThemeKt;
+Lcom/metrolist/music/ui/theme/FontKt;
+Lcom/metrolist/music/ui/theme/AnimationsKt;
+
+# --- DataStore preference access used at startup ---
+Lcom/metrolist/music/utils/DataStoreKt;
+Landroidx/datastore/preferences/core/PreferenceDataStoreFactory;
+Landroidx/datastore/core/DataStoreImpl;
+
+# --- Hilt / singleton graph ---
+Ldagger/hilt/android/HiltAndroidApp;
+Ldagger/internal/Provider;
+
+# --- Networking (Innertube) on the home screen ---
+Lcom/metrolist/innertube/YouTube;
+Lcom/metrolist/innertube/InnerTubes;
+Lokhttp3/OkHttpClient;
+Lio/ktor/client/HttpClient;
+
+# --- Database (Room) reads during startup ---
+Lcom/metrolist/music/db/MusicDatabase;
+Lcom/metrolist/music/db/DatabaseDao_Impl;
+Landroidx/room/RoomDatabase;
+
+# --- Image loading ---
+Lcoil3/AsyncImageKt;
+Lcoil3/imageLoader;
+
+# --- Playback service (background warm-up) ---
+Lcom/metrolist/music/playback/MusicService;
+Lcom/metrolist/music/playback/PlayerConnection;
+
+# --- Common UI entry components ---
+Lcom/metrolist/music/ui/component/ItemsKt;
+Lcom/metrolist/music/ui/component/AppNavigationKt;
+Lcom/metrolist/music/ui/player/MiniPlayerKt;
+
+# --- Material3 APIs hit on the first frame ---
+Landroidx/compose/material3/NavigationBarKt;
+Landroidx/compose/material3/TopAppBarKt;
+Landroidx/compose/material3/TextKt;
+
+# --- Kotlinx serialization / JSON used by the API layer ---
+Lkotlinx/serialization/json/Json;
+Lkotlinx/serialization/json/JsonKt;
+
+# --- Coroutines schedulers warm-up ---
+Lkotlinx/coroutines/DispatchersKt;
