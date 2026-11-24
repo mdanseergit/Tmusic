@@ -89,7 +89,6 @@ class App :
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-        YouTube.cacheDir = cacheDir
         InnerTubeXPlayer.initialize(this)
 
         // Pre-read Coil cache size on background to avoid runBlocking in newImageLoader
@@ -102,9 +101,14 @@ class App :
             // Apply settings, including proxy configuration, before building extraction transport.
             initializeSettings()
 
-            // Warm player config, cipher, and optional PO-token state lazily in background after cold start
+            // Warm player config, cipher, and optional PO-token state off the first-play path.
             launch(Dispatchers.IO) {
-                delay(6000)
+                delay(2500)
+                var waitedMs = 0
+                while (YouTube.visitorData == null && waitedMs < 12_000) {
+                    delay(500)
+                    waitedMs += 500
+                }
                 runCatching { InnerTubeXPlayer.prewarm() }
             }
 
