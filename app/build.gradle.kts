@@ -113,12 +113,31 @@ android {
         }
     }
 
+    val debugSigningConfig =
+        if (workflowDebugKeystoreFile != null) {
+            signingConfigs.getByName("workflowDebug")
+        } else if (persistentDebugKeystoreFile.exists()) {
+            signingConfigs.getByName("persistentDebug")
+        } else {
+            signingConfigs.getByName("debug")
+        }
+
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
             isCrunchPngs = false
             isDebuggable = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+        }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+            signingConfig = debugSigningConfig
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -132,14 +151,7 @@ android {
             if (appNameOverride == null) {
                 resValue("string", "app_name", "TMUSIC")
             }
-            signingConfig =
-                if (workflowDebugKeystoreFile != null) {
-                    signingConfigs.getByName("workflowDebug")
-                } else if (persistentDebugKeystoreFile.exists()) {
-                    signingConfigs.getByName("persistentDebug")
-                } else {
-                    signingConfigs.getByName("debug")
-                }
+            signingConfig = debugSigningConfig
         }
     }
 
