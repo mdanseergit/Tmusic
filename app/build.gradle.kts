@@ -175,10 +175,10 @@ android {
         warningsAsErrors = false
         abortOnError = false
         checkDependencies = false
-        // Lint never gated anything here (abortOnError = false), so the
-        // lintVital pass that assembleRelease implicitly triggers was pure
-        // build time. Run lint on demand with ./gradlew :app:lintGmsRelease.
-        checkReleaseBuilds = false
+        // Phase 1: release lint is enabled so warnings are reported on every
+        // release build. abortOnError stays false while existing warnings are
+        // triaged; nothing is mass-fixed in this phase.
+        checkReleaseBuilds = true
     }
 
     androidResources {

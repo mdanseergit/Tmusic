@@ -87,8 +87,10 @@ class App :
             Timber.e(e, "Failed to ensure DataStore directory")
         }
 
-        // Plant logging before extraction services initialize.
-        Timber.plant(Timber.DebugTree())
+        // Plant debug logging only in debug builds; release stays silent by default.
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
         InnerTubeXPlayer.initialize(this)
 
         // Pre-read Coil cache size on background to avoid runBlocking in newImageLoader

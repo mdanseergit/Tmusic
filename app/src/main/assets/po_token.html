@@ -120,12 +120,8 @@
      * @returns Promise that resolves when minter is ready
      */
     async function createPoTokenMinter(webPoSignalOutput, integrityToken) {
-      console.log('[createPoTokenMinter] ENTER - webPoSignalOutput type: ' + typeof webPoSignalOutput + ', length: ' + (webPoSignalOutput ? webPoSignalOutput.length : 'null'));
-      console.log('[createPoTokenMinter] integrityToken type: ' + typeof integrityToken + ', is array: ' + Array.isArray(integrityToken));
-
       // Get the minter factory function from webPoSignalOutput
       var getMinter = webPoSignalOutput[0];
-      console.log('[createPoTokenMinter] getMinter type: ' + typeof getMinter);
 
       if (!getMinter) {
         throw new Error('PMD:Undefined - webPoSignalOutput[0] is not defined');
@@ -137,21 +133,16 @@
 
       // Create the mint callback by passing the integrity token - THIS MUST ONLY HAPPEN ONCE!
       // NOTE: getMinter() may return a Promise, so we await it
-      console.log('[createPoTokenMinter] Calling getMinter(integrityToken)...');
       var mintCallback;
       try {
         var minterResult = getMinter(integrityToken);
-        console.log('[createPoTokenMinter] getMinter returned type: ' + typeof minterResult + ', isPromise: ' + (minterResult && typeof minterResult.then === 'function'));
         // Handle both sync and async getMinter
         if (minterResult && typeof minterResult.then === 'function') {
-          console.log('[createPoTokenMinter] getMinter returned a Promise, awaiting...');
           mintCallback = await minterResult;
-          console.log('[createPoTokenMinter] Promise resolved, mintCallback type: ' + typeof mintCallback);
         } else {
           mintCallback = minterResult;
         }
       } catch (e) {
-        console.log('[createPoTokenMinter] getMinter EXCEPTION: ' + e.message);
         throw new Error('GMC:Failed - getMinter() threw: ' + e.message);
       }
 
@@ -165,7 +156,6 @@
 
       // Store the minter globally for reuse
       poTokenMinter = mintCallback;
-      console.log('[createPoTokenMinter] SUCCESS - Minter created and stored globally (type: ' + typeof mintCallback + ')');
     }
 
     /**
@@ -187,7 +177,6 @@
         var mintResult = poTokenMinter(identifier);
         // Handle both sync and async mintCallback
         if (mintResult && typeof mintResult.then === 'function') {
-          console.log('[obtainPoToken] mintCallback returned a Promise, awaiting...');
           result = await mintResult;
         } else {
           result = mintResult;
@@ -202,11 +191,6 @@
 
       if (!(result instanceof Uint8Array)) {
         throw new Error('ODM:Invalid - result is not Uint8Array, got: ' + Object.prototype.toString.call(result));
-      }
-
-      // Validate token size (expected 110-128 bytes per BgUtils documentation)
-      if (result.length < 100 || result.length > 140) {
-        console.warn('[obtainPoToken] Token size ' + result.length + ' bytes may be outside expected range (110-128)');
       }
 
       return result;

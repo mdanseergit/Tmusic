@@ -2090,7 +2090,6 @@ object YouTube {
                 }
             }
         } catch (e: Exception) {
-            println("Error converting chart item: ${e.message}\n${Json.encodeToString(renderer)}")
             null
         }
     }
@@ -2161,7 +2160,6 @@ object YouTube {
                 }
             }
         } catch (e: Exception) {
-            println("Error converting two row item: ${e.message}\n${Json.encodeToString(renderer)}")
             null
         }
     }
