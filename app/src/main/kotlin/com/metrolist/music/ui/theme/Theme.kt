@@ -144,7 +144,41 @@ val TmusicBlackScheme = TmusicDarkScheme.copy(
 // ---------------------------------------------------------------------------
 
 /** App-wide typography. Uses the bundled BBH Bartle grotesk as the single family. */
-val TmusicTypography = Typography(defaultFontFamily = bbhBartle)
+val TmusicTypography =
+    Typography().let { base ->
+        base.copy(
+            displayLarge = base.displayLarge.copy(fontFamily = bbhBartle),
+            displayMedium = base.displayMedium.copy(fontFamily = bbhBartle),
+            displaySmall = base.displaySmall.copy(fontFamily = bbhBartle),
+            headlineLarge = base.headlineLarge.copy(fontFamily = bbhBartle),
+            headlineMedium = base.headlineMedium.copy(fontFamily = bbhBartle),
+            headlineSmall = base.headlineSmall.copy(fontFamily = bbhBartle),
+            titleLarge = base.titleLarge.copy(fontFamily = bbhBartle),
+            titleMedium = base.titleMedium.copy(fontFamily = bbhBartle),
+            titleSmall = base.titleSmall.copy(fontFamily = bbhBartle),
+            bodyLarge = base.bodyLarge.copy(fontFamily = bbhBartle),
+            bodyMedium = base.bodyMedium.copy(fontFamily = bbhBartle),
+            bodySmall = base.bodySmall.copy(fontFamily = bbhBartle),
+            labelLarge = base.labelLarge.copy(fontFamily = bbhBartle),
+            labelMedium = base.labelMedium.copy(fontFamily = bbhBartle),
+            labelSmall = base.labelSmall.copy(fontFamily = bbhBartle),
+            displayLargeEmphasized = base.displayLargeEmphasized.copy(fontFamily = bbhBartle),
+            displayMediumEmphasized = base.displayMediumEmphasized.copy(fontFamily = bbhBartle),
+            displaySmallEmphasized = base.displaySmallEmphasized.copy(fontFamily = bbhBartle),
+            headlineLargeEmphasized = base.headlineLargeEmphasized.copy(fontFamily = bbhBartle),
+            headlineMediumEmphasized = base.headlineMediumEmphasized.copy(fontFamily = bbhBartle),
+            headlineSmallEmphasized = base.headlineSmallEmphasized.copy(fontFamily = bbhBartle),
+            titleLargeEmphasized = base.titleLargeEmphasized.copy(fontFamily = bbhBartle),
+            titleMediumEmphasized = base.titleMediumEmphasized.copy(fontFamily = bbhBartle),
+            titleSmallEmphasized = base.titleSmallEmphasized.copy(fontFamily = bbhBartle),
+            bodyLargeEmphasized = base.bodyLargeEmphasized.copy(fontFamily = bbhBartle),
+            bodyMediumEmphasized = base.bodyMediumEmphasized.copy(fontFamily = bbhBartle),
+            bodySmallEmphasized = base.bodySmallEmphasized.copy(fontFamily = bbhBartle),
+            labelLargeEmphasized = base.labelLargeEmphasized.copy(fontFamily = bbhBartle),
+            labelMediumEmphasized = base.labelMediumEmphasized.copy(fontFamily = bbhBartle),
+            labelSmallEmphasized = base.labelSmallEmphasized.copy(fontFamily = bbhBartle),
+        )
+    }
 
 /** Crisp, structured corner radii (8–12dp) instead of bubbly heavy rounding. */
 val TmusicShapes = Shapes(
@@ -180,6 +214,14 @@ fun MetrolistTheme(
         content = content,
     )
 }
+
+@Composable
+fun TmusicTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    pureBlack: Boolean = false,
+    themeColor: Color = DefaultThemeColor,
+    content: @Composable () -> Unit,
+) = MetrolistTheme(darkTheme, pureBlack, themeColor, content)
 
 fun Bitmap.extractThemeColor(): Color = Color(
     Palette.from(this)
