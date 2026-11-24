@@ -128,6 +128,7 @@ android {
             isShrinkResources = true
             isCrunchPngs = false
             isDebuggable = false
+            signingConfig = debugSigningConfig
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
