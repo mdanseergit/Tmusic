@@ -204,7 +204,7 @@ fun AlbumScreen(
                             Modifier
                                 .size(240.dp)
                                 .shadow(
-                                    elevation = 24.dp,
+                                    elevation = 4.dp,
                                     shape = RoundedCornerShape(3.dp),
                                     spotColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                                 ),
