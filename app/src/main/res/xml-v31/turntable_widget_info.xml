@@ -5,7 +5,7 @@
     android:targetCellWidth="2"
     android:targetCellHeight="2"
     android:updatePeriodMillis="1800000"
-    android:previewImage="@mipmap/ic_launcher"
+    android:previewImage="@drawable/ic_logo"
     android:previewLayout="@layout/widget_turntable"
     android:initialLayout="@layout/widget_turntable"
     android:description="@string/turntable_widget_description"

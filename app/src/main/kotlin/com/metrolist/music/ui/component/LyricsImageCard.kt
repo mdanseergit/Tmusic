@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Metrolist Project (C) 2026
  * Licensed under GPL-3.0 | See git history for contributors
  */
@@ -403,7 +403,7 @@ fun LyricsImageCard(
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.small_icon),
+                            painter = painterResource(id = R.drawable.ic_logo),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(38.dp),
@@ -424,4 +424,5 @@ fun LyricsImageCard(
         }
     }
 }
+
 

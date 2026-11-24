@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Default circular art for turntable widget preview -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Circular gradient background -->
@@ -14,6 +14,7 @@
     </item>
     <!-- Centered app icon -->
     <item
-        android:drawable="@drawable/ic_launcher_foreground"
+        android:drawable="@drawable/ic_logo"
         android:gravity="center" />
 </layer-list>
+

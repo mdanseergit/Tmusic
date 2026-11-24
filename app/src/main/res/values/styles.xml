@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+﻿<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.Tmusic" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
@@ -44,7 +44,7 @@
         <item name="android:layout_width">64dp</item>
         <item name="android:layout_height">64dp</item>
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:src">@mipmap/ic_launcher</item>
+        <item name="android:src">@drawable/ic_logo</item>
         <item name="android:contentDescription">@string/widget_playlists</item>
     </style>
 
@@ -78,3 +78,4 @@
     </style>
 
 </resources>
+

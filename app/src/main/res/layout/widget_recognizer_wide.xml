@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Music Recognizer Widget – Wide (1×4 default) -->
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Music Recognizer Widget â€“ Wide (1Ã—4 default) -->
 <!-- Left: album art + song title + artist  |  Right: animated mic button -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/background"
@@ -58,7 +58,7 @@
 
     </LinearLayout>
 
-    <!-- Mic button area (right) – pulse ring behind circle -->
+    <!-- Mic button area (right) â€“ pulse ring behind circle -->
     <FrameLayout
         android:layout_width="56dp"
         android:layout_height="56dp">
@@ -92,3 +92,4 @@
     </FrameLayout>
 
 </LinearLayout>
+

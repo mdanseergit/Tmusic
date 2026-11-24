@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Metrolist Project (C) 2026
  * Licensed under GPL-3.0 | See git history for contributors
  */
@@ -70,7 +70,7 @@ object ComposeToImage {
             val backgroundRect = RectF(0f, 0f, imageWidth.toFloat(), imageHeight.toFloat())
 
             // Base scale on width relative to the reference design (340dp)
-            // 2160 / 340 ≈ 6.35
+            // 2160 / 340 â‰ˆ 6.35
             val scale = imageWidth / 340f
             val cornerRadius = 20f * scale
             val exportPath =
@@ -279,7 +279,7 @@ object ComposeToImage {
             canvas.drawOval(logoBoxRect, logoBgPaint)
 
             // Draw Logo Icon
-            val rawLogo = ContextCompat.getDrawable(context, R.drawable.small_icon)?.toBitmap()
+            val rawLogo = ContextCompat.getDrawable(context, R.drawable.ic_logo)?.toBitmap()
             rawLogo?.let {
                 val logoPaint =
                     Paint().apply {
@@ -631,3 +631,4 @@ object ComposeToImage {
             )
         }
 }
+

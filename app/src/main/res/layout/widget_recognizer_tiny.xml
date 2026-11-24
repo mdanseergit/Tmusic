@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Music Recognizer Widget – Tiny (1×1) -->
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Music Recognizer Widget â€“ Tiny (1Ã—1) -->
 <!-- Only animated mic circle, no text -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_recognizer_tiny_root"
@@ -35,3 +35,4 @@
     </FrameLayout>
 
 </FrameLayout>
+

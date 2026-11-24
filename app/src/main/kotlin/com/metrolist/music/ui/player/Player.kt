@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Metrolist Project (C) 2026
  * Licensed under GPL-3.0 | See git history for contributors
  */
@@ -986,7 +986,7 @@ fun BottomSheetPlayer(
                                     contentAlignment = Alignment.Center,
                                 ) {
                                     Icon(
-                                        painter = painterResource(R.drawable.small_icon),
+                                        painter = painterResource(R.drawable.ic_logo),
                                         contentDescription = null,
                                         modifier =
                                             Modifier
@@ -2213,3 +2213,4 @@ private fun PlayerMoreMenuButton(
         )
     }
 }
+

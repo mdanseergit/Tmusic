@@ -1,4 +1,4 @@
-package com.metrolist.music.ui.screens.wrapped.pages
+﻿package com.metrolist.music.ui.screens.wrapped.pages
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,7 +36,7 @@ fun ConclusionPage(onClose: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.ic_logo),
                 contentDescription = stringResource(R.string.wrapped_logo_content_description),
                 modifier = Modifier.size(96.dp),
                 tint = Color.White
@@ -75,3 +75,4 @@ fun ConclusionPage(onClose: () -> Unit) {
         }
     }
 }
+

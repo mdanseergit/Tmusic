@@ -143,6 +143,7 @@ fun AboutScreen(
                     painter = painterResource(R.drawable.tmusic_logo),
                     contentDescription = "TMUSIC Logo",
                     modifier = Modifier.size(64.dp),
+                    colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
                 )
 
                 Spacer(Modifier.width(20.dp))

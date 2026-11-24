@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Music Recognizer Widget – Compact (1×3) -->
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Music Recognizer Widget â€“ Compact (1Ã—3) -->
 <!-- Left: album art + song title + artist  |  Right: animated mic button (smaller padding) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/background"
@@ -92,3 +92,4 @@
     </FrameLayout>
 
 </LinearLayout>
+
