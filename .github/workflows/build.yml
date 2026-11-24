@@ -63,7 +63,7 @@ jobs:
         run: ./gradlew --console=plain assemble${{ matrix.variantName }}Release --warning-mode summary
         env:
           METROLIST_APPLICATION_ID: com.metrolist.music
-          METROLIST_APP_NAME: Metrolist Nightly
+          METROLIST_APP_NAME: TMusic Nightly
           METROLIST_BUILD_COMMIT: ${{ github.sha }}
           PULL_REQUEST: "false"
           GITHUB_EVENT_NAME: ${{ github.event_name }}
@@ -142,7 +142,7 @@ jobs:
         run: ./gradlew --console=plain assemble${{ matrix.variantName }}Debug --warning-mode summary
         env:
           METROLIST_APPLICATION_ID: com.metrolist.music
-          METROLIST_APP_NAME: Metrolist Nightly
+          METROLIST_APP_NAME: TMusic Nightly
           METROLIST_BUILD_COMMIT: ${{ github.sha }}
           PULL_REQUEST: "false"
           GITHUB_EVENT_NAME: ${{ github.event_name }}
@@ -174,7 +174,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          mv nightly/app-universal-with-Google-Cast.apk nightly/Metrolist-with-Google-Cast.apk
+          mv nightly/app-universal-with-Google-Cast.apk nightly/TMusic-with-Google-Cast.apk
 
           PREVIOUS_NIGHTLY_SHA=$(gh release view nightly --json targetCommitish --jq .targetCommitish 2>/dev/null || true)
           {
@@ -194,9 +194,9 @@ jobs:
           fi
 
           gh release create nightly \
-            nightly/Metrolist-with-Google-Cast.apk \
+            nightly/TMusic-with-Google-Cast.apk \
             --target "$GITHUB_SHA" \
-            --title "Metrolist Nightly" \
+            --title "TMusic Nightly" \
             --notes-file nightly-notes.md \
             --generate-notes \
             --prerelease \
