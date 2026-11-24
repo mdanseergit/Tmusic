@@ -56,11 +56,14 @@ class PlayerConnection(
     context: Context,
     binder: MusicBinder,
     val database: MusicDatabase,
-    scope: CoroutineScope,
+    parentScope: CoroutineScope,
 ) : Player.Listener {
     private companion object {
         private const val TAG = "PlayerConnection"
     }
+
+    private val connectionJob = kotlinx.coroutines.SupervisorJob(parentScope.coroutineContext[kotlinx.coroutines.Job])
+    val scope: CoroutineScope = CoroutineScope(parentScope.coroutineContext + connectionJob)
 
     val service = binder.service
     private val playerReadinessFlow = service.isPlayerReady
@@ -669,6 +672,7 @@ class PlayerConnection(
 
     fun dispose() {
         try {
+            connectionJob.cancel()
             attachedPlayer?.removeListener(this)
             attachedPlayer = null
             Timber.tag(TAG).d("PlayerConnection disposed successfully")
