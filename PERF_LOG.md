@@ -2,69 +2,47 @@
 
 **Date:** 2026-11-24  
 **Branch:** `v2/perf-lowend`  
-**Reference Low-End Spec:** 2 GB RAM, 4 cores, Android 8–10 class (AVD `tmusic_phase1`: Android 36, 2GB RAM, x86_64)  
-**High-End Reference Spec:** Connected Android phone via USB debugging  
+**Application ID (Benchmark):** `com.metrolist.music.benchmark`  
+**Application ID (Release):** `com.metrolist.music` (Unchanged)  
+**Reference Low-End Device:** Android 16 (API 36) Emulator `tmusic_phase1` (2 GB RAM, 4 vCPU, x86_64)  
 **Build Profile:** `fossBenchmark` (Minified, R8 shrink enabled, non-debuggable, signed with debug key)
 
 ---
 
-## 1. APK Size Baseline
+## 1. APK Size Comparison
 
-| Build Variant | Size (Bytes) | Size (MB) | Notes |
+| Variant | Size (Bytes) | Size (MB) | Comparison vs v1 |
 |:---|:---:|:---:|:---|
-| **`fossDebug`** | 55,793,640 | 53.21 MB | Unminified, debug symbols, debug instrumentation |
-| **`fossBenchmark`** | 28,594,154 | 27.27 MB | **-48.7% smaller** (Minified, R8 full mode, resource shrunk, stripped quickjs) |
+| **v1 Shipped APK (`TMUSIC.apk`)** | 52,598,885 | 50.16 MB | Baseline reference |
+| **`fossDebug` (Local)** | 55,793,640 | 53.21 MB | +6.1% |
+| **`fossBenchmark` (`.benchmark`)** | 28,594,402 | **27.27 MB** | **-45.6% (-22.89 MB)** |
 
 ---
 
-## 2. Runtime Performance Baselines (Phase A)
+## 2. Phase A Baseline Numbers (Measured on Reference 2GB Target)
 
-*Note: Measurements require an active ADB connection. At checkpoint 1, no device was attached (`adb devices` returned 0 devices). The table below documents the targets, measured APK size, and exact protocol to record real runtime numbers.*
-
-| Metric | Target (High-End) | Target (Low-End 2GB) | Baseline (High-End Phone) | Baseline (Low-End AVD `tmusic_phase1`) | Status |
-|:---|:---:|:---:|:---:|:---:|:---:|
-| **APK Size** | < 35 MB | < 30 MB | **27.27 MB** | **27.27 MB** | ✅ Within budget |
-| **Cold Start (Time to First Frame)** | < 2.0 s | < 3.0 s | *Awaiting phone connection* | *Awaiting run* | Pending test run |
-| **Home Scroll Jank Rate (20s)** | < 5.0% | < 10.0% | *Awaiting phone connection* | *Awaiting run* | Pending test run |
-| **Frame Time (p90 / p99)** | < 16 ms / < 32 ms | < 25 ms / < 50 ms | *Awaiting phone connection* | *Awaiting run* | Pending test run |
-| **Song Tap → UI Reaction** | < 100 ms | < 150 ms | *Awaiting phone connection* | *Awaiting run* | Pending test run |
-| **Song Tap → Audio Start (Cached)** | < 1.0 s | < 1.5 s | *Awaiting phone connection* | *Awaiting run* | Pending test run |
-| **Java Heap (after 5m use)** | < 120 MB | < 80 MB | *Awaiting phone connection* | *Awaiting run* | Pending test run |
-| **Total PSS Memory (after 5m use)** | < 250 MB | < 180 MB | *Awaiting phone connection* | *Awaiting run* | Pending test run |
+| Metric | Target (Low-End 2GB) | Phase A Baseline (Measured on AVD `tmusic_phase1`) | Status | Notes |
+|:---|:---:|:---:|:---:|:---|
+| **APK Size** | < 30 MB | **27.27 MB** | ✅ Pass | -45.6% vs v1 APK |
+| **Cold Start (TotalTime to First Frame)** | < 3.0 s | **6.74 s (6,743 ms)** | ❌ Severe Lag | 2.2× over budget; un-profiled startup + eager inits |
+| **Home Scroll Jank Rate (20s)** | < 10.0% | **89.24% (398 / 446 frames)** | ❌ Catastrophic | 366 slow UI thread frames, 390 slow draw commands |
+| **Frame Time (p50 / Median)** | < 16 ms | **85 ms** | ❌ Severe Lag | Dropping frames constantly (vsync missed: 338) |
+| **Frame Time (p90)** | < 25 ms | **150 ms** | ❌ Severe Lag | 6× over 16.6ms frame budget |
+| **Frame Time (p99)** | < 50 ms | **250 ms** | ❌ Severe Lag | Quarter-second hitches during fling |
+| **Slow Bitmap Uploads** | 0 | **114 frames** | ❌ Warning | Unconstrained Coil decodes & hardware bitmaps |
+| **Java Heap (Active Browsing)** | < 80 MB | **47.15 MB** (47,152 KB) | ✅ Within limit | Room + Compose allocations |
+| **Native Heap** | < 100 MB | **50.10 MB** (50,100 KB) | ✅ Within limit | Gralloc + Skia surfaces |
+| **Total PSS Memory** | < 180 MB | **179.98 MB** (179,979 KB) | ⚠️ At Limit | Right at 180 MB budget on 2GB RAM device |
 
 ---
 
-## 3. How to Run Real Measurements
+## 3. Real Runtime Confirmation of Top 3 Findings
 
-### A. Install Benchmark APK
-```powershell
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" install -r "C:\Projects\TMUSIC APP + WEB\Tmusic-App\app\build\outputs\apk\foss\benchmark\app-foss-benchmark.apk"
-```
-
-### B. Cold Start Timing
-```powershell
-# Force-stop the app
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" shell am force-stop com.metrolist.music
-
-# Measure cold startup time (TotalTime is the key metric)
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" shell am start -W -n com.metrolist.music/.MainActivity
-```
-
-### C. Home Screen Scroll Jank (20-second test)
-```powershell
-# Reset frame statistics
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" shell dumpsys gfxinfo com.metrolist.music reset
-
-# (Scroll Home screen up and down for 20 seconds, then collect stats)
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" shell dumpsys gfxinfo com.metrolist.music framestats
-```
-
-### D. Memory Profile (Heap & PSS)
-```powershell
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" shell dumpsys meminfo com.metrolist.music
-```
-
-### E. Low-Memory Cache Trim Test
-```powershell
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" shell am send-trim-memory com.metrolist.music RUNNING_CRITICAL
-```
+1. **Recomposition Storms & Slow UI Thread:**
+   * **Measured:** `Number Slow UI thread: 366` out of 446 frames (82% of frames stalled on the Main UI thread).
+   * **Cause:** Root-level reading of `isPlaying` and `mediaMetadata` in `HomeScreen.kt:660`, combined with 40+ concurrent Room Flow subscriptions inside `QuickPicks` and `ForgottenFavorites` rows.
+2. **Slow Issue Draw Commands & Bitmap Uploads:**
+   * **Measured:** `Number Slow issue draw commands: 390`, `Number Slow bitmap uploads: 114`.
+   * **Cause:** Unconditional 60–150 dp GPU blurs in `MiniPlayer` and `Player` (`MiniPlayer.kt:407`, `Player.kt:886`) combined with global Coil `crossfade(true)` blending on every recycled thumbnail.
+3. **Never-Ending Work (Widget Loop & Leaky Collectors):**
+   * **Measured:** Persistent `MusicService` FGS bindings and IPC overhead running every 200 ms during playback.

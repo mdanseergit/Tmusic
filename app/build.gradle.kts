@@ -137,6 +137,12 @@ android {
             initWith(buildTypes.getByName("release"))
             matchingFallbacks += listOf("release")
             isDebuggable = false
+            if (applicationIdOverride == null) {
+                applicationIdSuffix = ".benchmark"
+            }
+            if (appNameOverride == null) {
+                resValue("string", "app_name", "TMUSIC Benchmark")
+            }
             signingConfig = debugSigningConfig
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
