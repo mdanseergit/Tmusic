@@ -367,8 +367,10 @@ class MainActivity : FragmentActivity() {
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        // Initialize Listen Together manager
-        listenTogetherManager.initialize()
+        // Initialize Listen Together manager lazily off the main thread
+        lifecycleScope.launch(Dispatchers.Default) {
+            listenTogetherManager.initialize()
+        }
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             val locale =
