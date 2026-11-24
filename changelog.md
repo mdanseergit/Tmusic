@@ -1,3 +1,19 @@
+---v13.6.4
+
+## Added
+- Baseline profiles and a benchmark build variant for repeatable on-device performance measurement.
+- Room index on `Event.timestamp` with automatic migration to schema 39.
+
+## Changed
+- Lazy startup prewarm for Listen Together and player configuration.
+- Instant home cache and stable list keys/content types to reduce home-screen layout pop-in.
+- Widget refresh throttled to 1 Hz and skipped when no widgets are placed.
+- Lighter player surfaces with reduced GPU blur and shadow elevation.
+- Coil crossfade disabled globally; image-loader initialization no longer blocks the caller.
+
+## Fixed
+- Player connection child scope is cancelled on dispose to prevent collector leaks.
+
 ---v13.6.3
 
 This is a hotfix release to fix borked lyrics and media controller. We apologize for the inconvenience.  
