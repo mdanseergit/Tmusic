@@ -285,6 +285,7 @@ dependencies {
 
     implementation(libs.material3)
     implementation(libs.palette)
+    implementation(libs.profileinstaller)
     implementation(libs.materialKolor)
 
     implementation(libs.appcompat)

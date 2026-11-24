@@ -60,3 +60,21 @@ Lkotlinx/serialization/json/JsonKt;
 
 # --- Coroutines schedulers warm-up ---
 Lkotlinx/coroutines/DispatchersKt;
+
+# --- Home screen & lists ---
+Lcom/metrolist/music/ui/screens/HomeScreenKt;
+Lcom/metrolist/music/viewmodels/HomeViewModel;
+Landroidx/compose/foundation/lazy/LazyListKt;
+Landroidx/compose/foundation/lazy/grid/LazyGridKt;
+Lcom/metrolist/music/ui/component/SongListItemKt;
+Lcom/metrolist/music/ui/component/SongGridItemKt;
+Lcom/metrolist/music/ui/component/SpeedDialGridItemKt;
+Lcom/metrolist/music/ui/component/NavigationTitleKt;
+
+# --- Player & song tap path ---
+Lcom/metrolist/music/ui/player/PlayerKt;
+Lcom/metrolist/music/ui/player/PlaybackControlKt;
+Lcom/metrolist/music/playback/queues/YouTubeQueue;
+Lcom/metrolist/music/playback/queues/ListQueue;
+Landroidx/media3/exoplayer/ExoPlayer;
+Landroidx/media3/exoplayer/ExoPlayerImpl;

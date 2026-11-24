@@ -34,6 +34,7 @@ kuromojiIpadic = "0.9.0"
 innertubex = "v0.5.2"
 tinypinyin = "2.0.3"
 protobuf = "4.36.0"
+profileinstaller = "1.4.1"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -70,6 +71,7 @@ ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "shimmer" }
 
 palette = { module = "androidx.palette:palette", version.ref = "palette" }
+profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profileinstaller" }
 
 media3 = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
 media3-okhttp = { module = "androidx.media3:media3-datasource-okhttp", version.ref = "media3" }
