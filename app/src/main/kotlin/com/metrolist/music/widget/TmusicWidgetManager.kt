@@ -49,6 +49,14 @@ class TmusicWidgetManager @Inject constructor(
     private var cachedAlbumArt: Bitmap? = null
     private var cachedCircularAlbumArt: Bitmap? = null
 
+    fun hasActiveWidgets(): Boolean {
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        val musicWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, MusicWidgetReceiver::class.java))
+        val turntableWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, TurntableWidgetReceiver::class.java))
+        val playlistWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, PlaylistWidgetReceiver::class.java))
+        return musicWidgetIds.isNotEmpty() || turntableWidgetIds.isNotEmpty() || playlistWidgetIds.isNotEmpty()
+    }
+
     suspend fun updateWidgets(
         title: String,
         artist: String,

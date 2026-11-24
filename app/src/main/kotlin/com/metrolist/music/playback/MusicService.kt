@@ -4581,6 +4581,7 @@ class MusicService :
         isPlaying: Boolean,
         isLiked: Boolean? = currentSong.value?.song?.let { if (it.isEpisode) it.inLibrary != null else it.liked }
     ) {
+        if (!widgetManager.hasActiveWidgets()) return
         pendingWidgetUpdate = isPlaying to isLiked
         if (widgetUpdateInFlight) return
         widgetUpdateInFlight = true
@@ -4618,13 +4619,14 @@ class MusicService :
 
     private fun startWidgetUpdates() {
         widgetUpdateJob?.cancel()
+        if (!widgetManager.hasActiveWidgets()) return
         widgetUpdateJob =
             scope.launch {
                 while (isActive) {
                     if (player.isPlaying) {
                         updateWidgetUI(true)
                     }
-                    delay(200)
+                    delay(1000)
                 }
             }
     }
