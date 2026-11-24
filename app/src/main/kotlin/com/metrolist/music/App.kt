@@ -89,6 +89,7 @@ class App :
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        YouTube.cacheDir = cacheDir
         InnerTubeXPlayer.initialize(this)
 
         // Pre-read Coil cache size on background to avoid runBlocking in newImageLoader

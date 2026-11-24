@@ -78,6 +78,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import timber.log.Timber
+import java.io.File
 import java.io.FilterInputStream
 import java.io.InputStream
 import java.net.Proxy
@@ -131,6 +132,58 @@ object YouTube {
         set(value) {
             innerTube.useLoginForBrowse = value
         }
+
+    var cacheDir: File? = null
+
+    private val homeJson = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
+
+    fun getCachedHome(): HomePage? {
+        val dir = cacheDir ?: return null
+        val cacheFile = File(dir, "home_cache.json")
+        if (!cacheFile.exists() || cacheFile.length() == 0L) return null
+        return runCatching {
+            val text = cacheFile.readText()
+            val response = homeJson.decodeFromString<BrowseResponse>(text)
+            parseHomePage(response)
+        }.getOrNull()
+    }
+
+    private fun parseHomePage(response: BrowseResponse): HomePage {
+        val continuation =
+            response.contents
+                ?.singleColumnBrowseResultsRenderer
+                ?.tabs
+                ?.firstOrNull()
+                ?.tabRenderer
+                ?.content
+                ?.sectionListRenderer
+                ?.continuations
+                ?.getContinuation()
+        val sectionListRender =
+            response.contents
+                ?.singleColumnBrowseResultsRenderer
+                ?.tabs
+                ?.firstOrNull()
+                ?.tabRenderer
+                ?.content
+                ?.sectionListRenderer
+        val carousels = sectionListRender?.contents?.mapNotNull { it.musicCarouselShelfRenderer } ?: emptyList()
+        val sections =
+            carousels
+                .mapNotNull {
+                    HomePage.Section.fromMusicCarouselShelfRenderer(it)
+                }.toMutableList()
+        val chips =
+            sectionListRender
+                ?.header
+                ?.chipCloudRenderer
+                ?.chips
+                ?.mapNotNull { HomePage.Chip.fromChipCloudChipRenderer(it) }
+        return HomePage(chips, sections, continuation)
+    }
 
     fun extractionTransport(): InnerTube.ExtractionTransport = innerTube.extractionTransport()
 
@@ -1541,43 +1594,17 @@ object YouTube {
                 return@runCatching homeContinuation(continuation).getOrThrow()
             }
 
-            val response = innerTube.browse(WEB_REMIX, browseId = "FEmusic_home", params = params).body<BrowseResponse>()
-            Timber.d("home() response received")
-            val continuation =
-                response.contents
-                    ?.singleColumnBrowseResultsRenderer
-                    ?.tabs
-                    ?.firstOrNull()
-                    ?.tabRenderer
-                    ?.content
-                    ?.sectionListRenderer
-                    ?.continuations
-                    ?.getContinuation()
-            val sectionListRender =
-                response.contents
-                    ?.singleColumnBrowseResultsRenderer
-                    ?.tabs
-                    ?.firstOrNull()
-                    ?.tabRenderer
-                    ?.content
-                    ?.sectionListRenderer
-            Timber.d("home() sectionListRender contents size: ${sectionListRender?.contents?.size ?: 0}")
-            val carousels = sectionListRender?.contents?.mapNotNull { it.musicCarouselShelfRenderer } ?: emptyList()
-            Timber.d("home() carousels count: ${carousels.size}")
-            val sections =
-                carousels
-                    .mapNotNull {
-                        HomePage.Section.fromMusicCarouselShelfRenderer(it)
-                    }.toMutableList()
-            Timber.d("home() sections parsed: ${sections.size}")
-            val chips =
-                sectionListRender
-                    ?.header
-                    ?.chipCloudRenderer
-                    ?.chips
-                    ?.mapNotNull { HomePage.Chip.fromChipCloudChipRenderer(it) }
-            Timber.d("home() chips: ${chips?.size ?: 0}")
-            HomePage(chips, sections, continuation)
+            val httpResponse = innerTube.browse(WEB_REMIX, browseId = "FEmusic_home", params = params)
+            val rawText = httpResponse.bodyAsText()
+            if (params == null) {
+                cacheDir?.let { dir ->
+                    runCatching {
+                        File(dir, "home_cache.json").writeText(rawText)
+                    }
+                }
+            }
+            val response = homeJson.decodeFromString<BrowseResponse>(rawText)
+            parseHomePage(response)
         }
 
     private suspend fun homeContinuation(continuation: String): Result<HomePage> =

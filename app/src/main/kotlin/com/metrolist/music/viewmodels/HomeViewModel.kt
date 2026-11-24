@@ -466,6 +466,21 @@ class HomeViewModel @Inject constructor(
             }
 
             launch(Dispatchers.IO) {
+                if (homePage.value == null) {
+                    YouTube.getCachedHome()?.let { cached ->
+                        homePage.value = cached.copy(
+                            sections = cached.sections.mapNotNull { section ->
+                                val filtered = section.items
+                                    .filterOutNulls()
+                                    .filterExplicit(hideExplicit)
+                                    .filterVideoSongs(hideVideoSongs)
+                                    .filterYoutubeShorts(hideYoutubeShorts)
+                                if (filtered.isEmpty()) null else section.copy(items = filtered)
+                            }
+                        )
+                    }
+                }
+
                 YouTube.home().onSuccess { page ->
                     homePage.value = page.copy(
                         sections = page.sections.mapNotNull { section ->
