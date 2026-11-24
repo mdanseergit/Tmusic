@@ -285,13 +285,12 @@ class App :
     private var cachedCoilCacheSize: Int? = null
 
     override fun newImageLoader(context: PlatformContext): ImageLoader {
-        val cacheSize = cachedCoilCacheSize ?: runBlocking {
-            dataStore.data.map { it[MaxImageCacheSizeKey] ?: 512 }.first()
-        }
+        // Fast non-blocking fallback to 256MB instead of blocking main thread with runBlocking
+        val cacheSize = cachedCoilCacheSize ?: 256
         return ImageLoader
             .Builder(this)
             .apply {
-                crossfade(true)
+                crossfade(false)
                 allowHardware(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
                 // Memory cache for fast image loading (prevents network requests on recomposition)
                 memoryCache {
@@ -314,6 +313,18 @@ class App :
                     networkCachePolicy(CachePolicy.ENABLED)
                 }
             }.build()
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        if (level >= TRIM_MEMORY_RUNNING_LOW) {
+            SingletonImageLoader.get(this).memoryCache?.clear()
+        }
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        SingletonImageLoader.get(this).memoryCache?.clear()
     }
 
     companion object {
