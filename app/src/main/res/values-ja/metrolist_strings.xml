@@ -58,7 +58,6 @@
         <item quantity="other">%d秒</item>
     </plurals>
     <string name="percentage_format">%d%%</string>
-    <string name="release_notes">リリースノート</string>
     <string name="player_background_style">プレーヤーの背景</string>
     <string name="player_background_blur">ぼかし</string>
     <string name="player_buttons_style">プレーヤーボタンの色</string>
@@ -142,12 +141,6 @@
     <string name="settings_section_player_content">プレーヤーとコンテンツ</string>
     <string name="settings_section_storage">ストレージとデータ</string>
     <string name="settings_section_system">システムと概要</string>
-    <string name="updater">アップデーター</string>
-    <string name="check_for_updates">自動でアップデートを確認する</string>
-    <string name="update_notifications">新しいバージョンがある場合は通知を受け取る</string>
-    <string name="update_available_title">アップデートが利用可能です</string>
-    <string name="update_channel_name">アプリをアップデート</string>
-    <string name="update_channel_desc">新しいアプリのバージョンの通知</string>
     <string name="audio_offload">オフロード再生</string>
     <string name="audio_offload_description">音声の再生にオフロードのオーディオパスを使用します。この設定をオフにすると、バッテリー消費が増える場合がありますが、再生や音声の処理に関する問題が改善する場合があります</string>
     <string name="integrations">外部のサービスと連携</string>
@@ -529,21 +522,6 @@
     <string name="lyrics_provider_selection_desc">使用する歌詞の提供元を選択します</string>
     <string name="lyrics_provider_priority">歌詞の提供元の優先順位</string>
     <string name="lyrics_provider_priority_desc">ドラッグして提供元を並び替えます。上にあるほど優先順位が高くなります</string>
-    <string name="changelog">変更履歴</string>
-    <string name="changelog_empty">変更履歴はありません</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
-    <string name="list_bullet">•</string>
-    <string name="view_on_github">GitHubを開く</string>
-    <string name="current_version">バージョン</string>
-    <string name="version_format">Ver. %s</string>
-    <string name="update_settings">アップデート設定</string>
-    <string name="check_for_updates_title">アップデート</string>
-    <string name="checking_for_updates">アップデートを確認中…</string>
-    <string name="latest_version_format">アプリは最新です：Ver. %s</string>
-    <string name="check_for_updates_button">アップデートを確認</string>
-    <string name="hide_changelog">変更履歴を非表示</string>
-    <string name="view_changelog">変更履歴を表示</string>
-    <string name="failed_to_check_updates">アップデートの確認に失敗しました：%s</string>
     <string name="set_as_default">デフォルトに設定</string>
     <string name="sleep_timer_default_set">スリープタイマーのデフォルト値を%d分に設定しました</string>
     <string name="found_in_settings_content">設定 → コンテンツにあります</string>
@@ -788,10 +766,6 @@
     <string name="widget_playlists_description">ミニプレイヤー操作付きのプレイリストショートカット</string>
     <string name="choose_something_below">以下から選択してください</string>
     <string name="and">そして</string>
-    <string name="kmp_upgrade_title">Metrolist KMP %s が利用可能です</string>
-    <string name="kmp_upgrade_warning">Metrolist KMP は早期アクセス中です。 機能が動作しない、不完全である、または予告なく変更となる可能性があります。</string>
-    <string name="kmp_upgrade_action">KMP に更新する</string>
-    <string name="kmp_upgrade_later">今はしない</string>
     <string name="audio_track_playback_params">ハードウェアオーディオ処理を用いる</string>
     <string name="audio_track_playback_params_description">速さ/ピッチの変更にソフトウェアの処理の代わりに Android の AudioTrack を使用します。極端なピッチ値において安定性が増します</string>
     <string name="error_job_cancelled">この動画は再生できません。もう一度試すか次の曲へスキップしてください。</string>

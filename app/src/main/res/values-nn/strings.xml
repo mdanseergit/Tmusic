@@ -274,7 +274,6 @@
     <string name="preview">Førehandsvisning</string>
     <string name="about">Om</string>
     <string name="app_version">Apputgåve</string>
-    <string name="new_version_available">Ny utgåve tilgjegeleg</string>
     <string name="translation_models">Omsetjingsmodellar</string>
     <string name="clear_translation_models">Reinska omsetjingsmodellar</string>
 </resources>

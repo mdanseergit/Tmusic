@@ -93,7 +93,6 @@
     <string name="not_logged_in_youtube">Nije se prijavljen na YouTube</string>
     <string name="default_links">Otavanje podržanih poveznica</string>
     <string name="open_app_settings_error">Nemogće otvaranje postavka aplikacije</string>
-    <string name="release_notes">Obavijest o izdanjima [Croatian</string>
     <string name="all_time">Sve vrijeme</string>
     <string name="past_24_hours">Prošle 24 sate</string>
     <string name="past_week">Prošla sedmica</string>
@@ -129,8 +128,6 @@
     <string name="settings_section_player_content">Reproduktor i sadržaj</string>
     <string name="settings_section_storage">Pohrana i podaci</string>
     <string name="settings_section_system">Sustav i o aplikaciji</string>
-    <string name="updater">Ažuriranja</string>
-    <string name="check_for_updates">Automatska provjera ažuriranja</string>
     <string name="integrations">Ugradnja</string>
     <string name="enable">Omogući</string>
     <string name="about_artist">O umjetniku</string>

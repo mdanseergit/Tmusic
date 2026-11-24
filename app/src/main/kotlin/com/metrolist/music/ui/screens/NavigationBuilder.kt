@@ -55,7 +55,6 @@ import com.metrolist.music.ui.screens.settings.RomanizationSettings
 import com.metrolist.music.ui.screens.settings.SettingsScreen
 import com.metrolist.music.ui.screens.settings.StorageSettings
 import com.metrolist.music.ui.screens.settings.ThemeScreen
-import com.metrolist.music.ui.screens.settings.UpdaterScreen
 import com.metrolist.music.ui.screens.settings.integrations.DiscordSettings
 import com.metrolist.music.ui.screens.settings.integrations.IntegrationScreen
 import com.metrolist.music.ui.screens.settings.integrations.LastFMSettings
@@ -69,7 +68,6 @@ import com.metrolist.music.utils.rememberPreference
 fun NavGraphBuilder.navigationBuilder(
     navController: NavHostController,
     scrollBehavior: TopAppBarScrollBehavior,
-    latestVersionName: String,
     activity: Activity,
     snackbarHostState: SnackbarHostState,
 ) {
@@ -345,7 +343,7 @@ fun NavGraphBuilder.navigationBuilder(
     }
 
     composable("settings") {
-        SettingsScreen(navController, latestVersionName)
+        SettingsScreen(navController)
     }
 
     composable("settings/appearance") {
@@ -398,10 +396,6 @@ fun NavGraphBuilder.navigationBuilder(
 
     composable(route = "settings/integrations/listen_together") {
         ListenTogetherSettings(navController)
-    }
-
-    composable("settings/updater") {
-        UpdaterScreen(navController)
     }
 
     composable("settings/about") {

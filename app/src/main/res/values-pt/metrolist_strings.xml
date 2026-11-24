@@ -93,7 +93,6 @@
     <string name="not_logged_in_youtube">Não conectado ao YouTube</string>
     <string name="default_links">Abrir ligações suportadas</string>
     <string name="open_app_settings_error">Não foi possível a app de definições</string>
-    <string name="release_notes">Registo de mudanças</string>
     <string name="all_time">Desde sempre</string>
     <string name="past_24_hours">Últimas 24 horas</string>
     <string name="past_week">Última semana</string>
@@ -154,11 +153,6 @@
     <string name="settings_section_player_content">Reprodutor &amp; Conteúdo</string>
     <string name="settings_section_storage">Armazenamento &amp; Dados</string>
     <string name="settings_section_system">Sistema &amp; Sobre</string>
-    <string name="updater">Atualizador</string>
-    <string name="check_for_updates">Procurar por atualizações automaticamente</string>
-    <string name="update_notifications">Habilitar notificações de atualizações</string>
-    <string name="update_available_title">Atualização Disponível</string>
-    <string name="update_channel_desc">Notificações sobre novas versões</string>
     <string name="google_cast">Google Cast</string>
     <string name="album_art_for">Arte do álbum para %s</string>
     <string name="wrapped_total_albums_title">Tu ouviste</string>
@@ -203,7 +197,6 @@
     <string name="lyrics_romanize_title">Romanização</string>
     <string name="lyrics_romanization">Romanização de letras</string>
     <string name="romanize_current_track">Romanizar a faixa atual</string>
-    <string name="update_channel_name">Atualizações da aplicação</string>
     <string name="audio_offload">Habilitar descarregamento</string>
     <string name="audio_offload_description">Use o caminho de descarregamento de áudio para reprodução de áudio. Desativar essa opção pode aumentar o consumo de energia, mas pode ser útil se você tiver problemas com a reprodução de áudio ou pós-processamento</string>
     <string name="google_cast_description">Ativar a transmissão de áudio para o Chromecast e outros dispositivos compatíveis com transmissão</string>
@@ -334,20 +327,6 @@
     <string name="export_failed">Falha ao exportar a lista</string>
     <string name="export_option_share">Partilhar</string>
     <string name="export_option_save">Salvar nos Documentos</string>
-    <string name="changelog">Lista de mudanças</string>
-    <string name="changelog_empty">Não foram encontradas listas de mudanças</string>
-    <string name="list_bullet">•</string>
-    <string name="view_on_github">Ver no GitHub</string>
-    <string name="current_version">Versão Atual</string>
-    <string name="version_format">Versão: %s</string>
-    <string name="update_settings">Salvar configurações</string>
-    <string name="check_for_updates_title">Verificar se existem updates</string>
-    <string name="checking_for_updates">A verificar se existem updates…</string>
-    <string name="latest_version_format">Última versão: %s</string>
-    <string name="check_for_updates_button">Verificar se existem atualizações</string>
-    <string name="hide_changelog">Esconder lista de mudanças</string>
-    <string name="view_changelog">Ver lista de mudanças</string>
-    <string name="failed_to_check_updates">Falha ao verificar a existência de atualizações: %s</string>
     <string name="set_as_default">Defenir como predefinição</string>
     <string name="sleep_timer_default_set">A predefinição do temporizador de sono agora é de %d minutos</string>
     <string name="enable_automatic_sleeptimer">Abilitar temporizador de sono automático..</string>
@@ -415,7 +394,6 @@
     <string name="enable_paxsenix">Abilitar o serviço Paxsenix</string>
     <string name="enable_paxsenix_desc">Letras síncronas de alta qualidade fornecidas pela API da Paxsenix</string>
     <string name="lyrics_provider_priority_desc">Arraste para re-ordenar os provedores por preferência. Quanto maior for a posição, maior será a prioridade.</string>
-    <string name="github_releases_url">(Note for the development team: Creation of a Portuguese subrepository for releases may be nessasary. FOR NOW we will be using the official pages)\n(Para quem é português e não consegue fazer a tradução pedimos imensa desculpa, mas o problema irá ser resolvido, e estaremos com uma solução o mais rápido possível!)\nhttps://github.com/MetrolistGroup/Metrolist/releases</string>
     <string name="alarm_battery_optimization_desc">Desabilite optimizações de bateria para um melhor comportamento do alarme em segundo plano</string>
     <string name="resume_on_bluetooth_connect">Resumir musica quando um dispositivo bluetooth for conectado.</string>
     <string name="crossfade_gapless">Desabilitar para álbuns sem espaço de intervalo entre musicas</string>
@@ -431,10 +409,6 @@
     <string name="system_equalizer_desc">Abrir equalizador embutido do Android</string>
     <string name="eq_wizard">Mago do AutoEQ</string>
     <string name="playlist_unavailable">Lista de Reprodução indisponível</string>
-    <string name="kmp_upgrade_title">Metrolist KMP %s está disponível</string>
-    <string name="kmp_upgrade_warning">Metrolist KMP está em acesso antecipado. Funcionalidades poderão estar partidas, incompletas, ou mudadas sem aviso.</string>
-    <string name="kmp_upgrade_action">Atualizar para KMP</string>
-    <string name="kmp_upgrade_later">Agora não</string>
     <string name="audio_track_playback_params">Usar processamento de áudio via hardware</string>
     <string name="mini_player_background_not_available">Indisponível quando o novo mini-reprodutor está desativado</string>
     <string name="eq_download_db">Transferir base de dados do AutoEQ (17 MB)</string>

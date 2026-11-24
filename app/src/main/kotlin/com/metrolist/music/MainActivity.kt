@@ -8,7 +8,6 @@ package com.metrolist.music
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ForegroundServiceStartNotAllowedException
-import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
@@ -42,7 +41,6 @@ import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -51,11 +49,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -66,7 +60,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.contentColorFor
@@ -106,8 +99,6 @@ import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
@@ -131,7 +122,6 @@ import com.metrolist.innertube.models.SongItem
 import com.metrolist.innertube.models.WatchEndpoint
 import com.metrolist.music.constants.AppBarHeight
 import com.metrolist.music.constants.AppLanguageKey
-import com.metrolist.music.constants.CheckForUpdatesKey
 import com.metrolist.music.constants.DarkModeKey
 import com.metrolist.music.constants.DefaultOpenTabKey
 import com.metrolist.music.constants.DensityScaleKey
@@ -139,7 +129,6 @@ import com.metrolist.music.constants.DisableScreenshotKey
 import com.metrolist.music.constants.EnableHighRefreshRateKey
 import com.metrolist.music.constants.EnableLandscapeScalingKey
 import com.metrolist.music.constants.ExperimentalLyricsKey
-import com.metrolist.music.constants.LastSeenVersionKey
 import com.metrolist.music.constants.ListenTogetherInTopBarKey
 import com.metrolist.music.constants.ListenTogetherUsernameKey
 import com.metrolist.music.constants.LyricsProviderOrderKey
@@ -158,7 +147,6 @@ import com.metrolist.music.constants.SimpMusicMigrationDoneKey
 import com.metrolist.music.constants.SlimNavBarHeight
 import com.metrolist.music.constants.SlimNavBarKey
 import com.metrolist.music.constants.StopMusicOnTaskClearKey
-import com.metrolist.music.constants.UpdateNotificationsEnabledKey
 import com.metrolist.music.constants.UseNewMiniPlayerDesignKey
 import com.metrolist.music.constants.VideoThumbnailMigrationDoneKey
 import com.metrolist.music.db.MusicDatabase
@@ -184,7 +172,6 @@ import com.metrolist.music.ui.menu.YouTubeSongMenu
 import com.metrolist.music.ui.player.BottomSheetPlayer
 import com.metrolist.music.ui.screens.Screens
 import com.metrolist.music.ui.screens.navigationBuilder
-import com.metrolist.music.ui.screens.settings.ChangelogScreen
 import com.metrolist.music.ui.screens.settings.DarkMode
 import com.metrolist.music.ui.screens.settings.NavigationTab
 import com.metrolist.music.ui.theme.DefaultThemeColor
@@ -192,11 +179,9 @@ import com.metrolist.music.ui.theme.MetrolistTheme
 import com.metrolist.music.ui.theme.standardTween
 import com.metrolist.music.ui.utils.appBarScrollBehavior
 import com.metrolist.music.ui.utils.resetHeightOffset
-import com.metrolist.music.utils.ReleaseInfo
 import com.metrolist.music.utils.SearchRoutes
 import com.metrolist.music.utils.SyncUtils
 import com.metrolist.music.utils.ArtistNameAliases
-import com.metrolist.music.utils.Updater
 import com.metrolist.music.utils.dataStore
 import com.metrolist.music.utils.safeDataStoreEdit
 import com.metrolist.music.utils.get
@@ -246,7 +231,6 @@ class MainActivity : FragmentActivity() {
 
     private lateinit var navController: NavHostController
     private var pendingIntent: Intent? = null
-    private var latestVersionName by mutableStateOf(BuildConfig.BASE_VERSION_NAME)
 
     // Keep PlayerConnection as regular property - NOT mutableStateOf to prevent UI recomposition
     // when it becomes null during onStop. Only update the snapshot for Compose when needed.
@@ -414,7 +398,6 @@ class MainActivity : FragmentActivity() {
         // Defer migration and version tracking to avoid blocking first frame
         lifecycleScope.launch(Dispatchers.IO) {
             val preferences = dataStore.data.first()
-            val currentVersion = BuildConfig.BASE_VERSION_NAME
 
             // SimpMusic Removal Migration
             if (preferences[SimpMusicMigrationDoneKey] != true) {
@@ -437,7 +420,6 @@ class MainActivity : FragmentActivity() {
                         settings[PreferredLyricsProviderKey] = PreferredLyricsProvider.LRCLIB.name
                     }
                     settings[SimpMusicMigrationDoneKey] = true
-                    settings[LastSeenVersionKey] = currentVersion
                 }
             }
 
@@ -449,16 +431,8 @@ class MainActivity : FragmentActivity() {
             }
         }
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            safeDataStoreEdit { settings ->
-                settings[LastSeenVersionKey] = BuildConfig.BASE_VERSION_NAME
-            }
-        }
-
         setContent {
             MetrolistApp(
-                latestVersionName = latestVersionName,
-                onLatestVersionNameChange = { latestVersionName = it },
                 playerConnection = playerConnectionSnapshot,
                 database = database,
                 downloadUtil = downloadUtil,
@@ -471,70 +445,11 @@ class MainActivity : FragmentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun MetrolistApp(
-        latestVersionName: String,
-        onLatestVersionNameChange: (String) -> Unit,
         playerConnection: PlayerConnection?,
         database: MusicDatabase,
         downloadUtil: DownloadUtil,
         syncUtils: SyncUtils,
     ) {
-        val checkForUpdates by rememberPreference(CheckForUpdatesKey, defaultValue = true)
-        var kmpRelease by remember { mutableStateOf<ReleaseInfo?>(null) }
-        var kmpUpgradeDismissed by rememberSaveable { mutableStateOf(false) }
-
-        if (BuildConfig.UPDATER_AVAILABLE) {
-            LaunchedEffect(checkForUpdates) {
-                if (checkForUpdates) {
-                    withContext(Dispatchers.IO) {
-                        val updatesEnabled = dataStore.get(CheckForUpdatesKey, true)
-                        val notifEnabled = dataStore.get(UpdateNotificationsEnabledKey, true)
-                        if (!updatesEnabled) return@withContext
-
-                        Updater.checkForUpdate().onSuccess { (releaseInfo, hasUpdate) ->
-                            if (releaseInfo != null) {
-                                onLatestVersionNameChange(releaseInfo.versionName)
-                                if (hasUpdate && notifEnabled) {
-                                    val downloadUrl = Updater.getDownloadUrlForCurrentVariant(releaseInfo)
-                                    if (downloadUrl != null) {
-                                        val intent = Intent(Intent.ACTION_VIEW, downloadUrl.toUri())
-
-                                        val flags =
-                                            PendingIntent.FLAG_UPDATE_CURRENT or
-                                                (PendingIntent.FLAG_IMMUTABLE)
-                                        val pending = PendingIntent.getActivity(this@MainActivity, 1001, intent, flags)
-
-                                        val notif =
-                                            NotificationCompat
-                                                .Builder(this@MainActivity, "updates")
-                                                .setSmallIcon(R.drawable.update)
-                                                .setContentTitle(getString(R.string.update_available_title))
-                                                .setContentText(releaseInfo.versionName)
-                                                .setContentIntent(pending)
-                                                .setAutoCancel(true)
-                                                .build()
-
-                                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
-                                            ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.POST_NOTIFICATIONS) ==
-                                            PackageManager.PERMISSION_GRANTED
-                                        ) {
-                                            NotificationManagerCompat.from(this@MainActivity).notify(1001, notif)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        Updater.getLatestKmpRelease().onSuccess { releaseInfo ->
-                            kmpRelease = releaseInfo
-                        }
-                    }
-                } else {
-                    onLatestVersionNameChange(BuildConfig.BASE_VERSION_NAME)
-                    kmpRelease = null
-                }
-            }
-        }
-
         val enableHighRefreshRate by rememberPreference(EnableHighRefreshRateKey, defaultValue = true)
 
         LaunchedEffect(enableHighRefreshRate) {
@@ -587,8 +502,6 @@ class MainActivity : FragmentActivity() {
         val (selectedThemeColorInt) = rememberPreference(SelectedThemeColorKey, defaultValue = DefaultThemeColor.toArgb())
         val selectedThemeColor = Color(selectedThemeColorInt)
 
-        val showChangelog = rememberSaveable { mutableStateOf(false) }
-
         MetrolistTheme(
             darkTheme = useDarkTheme,
             pureBlack = pureBlack,
@@ -634,14 +547,6 @@ class MainActivity : FragmentActivity() {
                 val bottomInsetDp = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()
 
                 val navController = rememberNavController()
-
-                LaunchedEffect(Unit) {
-                    val lastSeenVersion = dataStore.data.first()[LastSeenVersionKey] ?: ""
-                    val currentVersion = BuildConfig.BASE_VERSION_NAME
-                    if (lastSeenVersion != currentVersion) {
-                        showChangelog.value = true
-                    }
-                }
 
                 val homeViewModel: HomeViewModel = hiltViewModel()
                 val accountImageUrl by homeViewModel.accountImageUrl.collectAsStateWithLifecycle()
@@ -952,13 +857,8 @@ class MainActivity : FragmentActivity() {
                     LocalShimmerTheme provides ShimmerTheme,
                     LocalSyncUtils provides syncUtils,
                     LocalListenTogetherManager provides listenTogetherManager,
-                    LocalChangelogState provides showChangelog,
                     LocalArtistNameAliases provides artistNameAliases,
                 ) {
-                    if (showChangelog.value) {
-                        ChangelogScreen(onDismiss = { showChangelog.value = false })
-                    }
-
                     Scaffold(
                         snackbarHost = { SnackbarHost(snackbarHostState) },
                         topBar = {
@@ -999,27 +899,21 @@ class MainActivity : FragmentActivity() {
                                                 }
                                             }
                                             IconButton(onClick = { showAccountDialog = true }) {
-                                                BadgedBox(badge = {
-                                                    if (latestVersionName != BuildConfig.BASE_VERSION_NAME) {
-                                                        Badge()
-                                                    }
-                                                }) {
-                                                    if (accountImageUrl != null) {
-                                                        AsyncImage(
-                                                            model = accountImageUrl,
-                                                            contentDescription = stringResource(R.string.account),
-                                                            modifier =
-                                                                Modifier
-                                                                    .size(24.dp)
-                                                                    .clip(CircleShape),
-                                                        )
-                                                    } else {
-                                                        Icon(
-                                                            painter = painterResource(R.drawable.account),
-                                                            contentDescription = stringResource(R.string.account),
-                                                            modifier = Modifier.size(24.dp),
-                                                        )
-                                                    }
+                                                if (accountImageUrl != null) {
+                                                    AsyncImage(
+                                                        model = accountImageUrl,
+                                                        contentDescription = stringResource(R.string.account),
+                                                        modifier =
+                                                            Modifier
+                                                                .size(24.dp)
+                                                                .clip(CircleShape),
+                                                    )
+                                                } else {
+                                                    Icon(
+                                                        painter = painterResource(R.drawable.account),
+                                                        contentDescription = stringResource(R.string.account),
+                                                        modifier = Modifier.size(24.dp),
+                                                    )
                                                 }
                                             }
                                         },
@@ -1302,7 +1196,6 @@ class MainActivity : FragmentActivity() {
                                     navigationBuilder(
                                         navController = navController,
                                         scrollBehavior = topAppBarScrollBehavior,
-                                        latestVersionName = latestVersionName,
                                         activity = this@MainActivity,
                                         snackbarHostState = snackbarHostState,
                                     )
@@ -1327,7 +1220,6 @@ class MainActivity : FragmentActivity() {
                                 showAccountDialog = false
                                 homeViewModel.refresh()
                             },
-                            latestVersionName = latestVersionName,
                         )
                     }
 
@@ -1353,56 +1245,6 @@ class MainActivity : FragmentActivity() {
                                     }
                                 }
                             }
-                        }
-                    }
-
-                    if (!showChangelog.value && !kmpUpgradeDismissed) {
-                        kmpRelease?.let { release ->
-                            val downloadUrl = release.assets.first { it.name == Updater.KMP_APK_NAME }.downloadUrl
-                            AlertDialog(
-                                onDismissRequest = { kmpUpgradeDismissed = true },
-                                title = {
-                                    Text(stringResource(R.string.kmp_upgrade_title, release.versionName))
-                                },
-                                text = {
-                                    Column(
-                                        modifier =
-                                            Modifier
-                                                .heightIn(max = 480.dp)
-                                                .verticalScroll(rememberScrollState()),
-                                    ) {
-                                        Text(
-                                            text = stringResource(R.string.kmp_upgrade_warning),
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = MaterialTheme.colorScheme.error,
-                                        )
-                                        Text(
-                                            text = stringResource(R.string.changelog),
-                                            style = MaterialTheme.typography.titleSmall,
-                                            modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
-                                        )
-                                        Text(
-                                            text = release.description.ifBlank { stringResource(R.string.changelog_empty) },
-                                            style = MaterialTheme.typography.bodySmall,
-                                        )
-                                    }
-                                },
-                                confirmButton = {
-                                    TextButton(
-                                        onClick = {
-                                            kmpUpgradeDismissed = true
-                                            startActivity(Intent(Intent.ACTION_VIEW, downloadUrl.toUri()))
-                                        },
-                                    ) {
-                                        Text(stringResource(R.string.kmp_upgrade_action))
-                                    }
-                                },
-                                dismissButton = {
-                                    TextButton(onClick = { kmpUpgradeDismissed = true }) {
-                                        Text(stringResource(R.string.kmp_upgrade_later))
-                                    }
-                                },
-                            )
                         }
                     }
                 }
@@ -1607,6 +1449,5 @@ val LocalPlayerAwareWindowInsets = compositionLocalOf<WindowInsets> { error("No 
 val LocalDownloadUtil = staticCompositionLocalOf<DownloadUtil> { error("No DownloadUtil provided") }
 val LocalSyncUtils = staticCompositionLocalOf<SyncUtils> { error("No SyncUtils provided") }
 val LocalListenTogetherManager = staticCompositionLocalOf<com.metrolist.music.listentogether.ListenTogetherManager?> { null }
-val LocalChangelogState = staticCompositionLocalOf<MutableState<Boolean>> { error("No LocalChangelogState provided") }
 val LocalArtistNameAliases = staticCompositionLocalOf<Map<String, String>> { emptyMap() }
 val LocalIsPlayerExpanded = compositionLocalOf { false }

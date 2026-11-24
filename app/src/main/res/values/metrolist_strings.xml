@@ -246,22 +246,6 @@
     <string name="default_links">Open supported links</string>
     <string name="open_app_settings_error">Couldn\'t open the app settings</string>
 
-    <string name="release_notes">Release notes</string>
-    <string name="changelog">Changelog</string>
-    <string name="changelog_empty">No changelogs available</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
-    <string name="list_bullet">•</string>
-    <string name="view_on_github">View on GitHub</string>
-    <string name="current_version">Current version</string>
-    <string name="version_format">Version: %s</string>
-    <string name="update_settings">Update settings</string>
-    <string name="check_for_updates_title">Check for updates</string>
-    <string name="checking_for_updates">Checking for updates…</string>
-    <string name="latest_version_format">Latest: %s</string>
-    <string name="check_for_updates_button">Check for updates</string>
-    <string name="hide_changelog">Hide changelog</string>
-    <string name="view_changelog">View changelog</string>
-    <string name="failed_to_check_updates">Failed to check for updates: %s</string>
 
     <string name="all_time">All time</string>
     <string name="past_24_hours">Past 24 hours</string>
@@ -369,17 +353,6 @@
     <string name="settings_section_storage">Storage &amp; Data</string>
     <string name="settings_section_system">System &amp; About</string>
 
-    <!-- Updater -->
-    <string name="updater">Updater</string>
-    <string name="check_for_updates">Automatically check for updates</string>
-    <string name="update_notifications">Enable update notifications</string>
-    <string name="update_available_title">Update available</string>
-    <string name="update_channel_name">App updates</string>
-    <string name="update_channel_desc">Notifications about new app versions</string>
-    <string name="kmp_upgrade_title">Metrolist KMP %s is available</string>
-    <string name="kmp_upgrade_warning">Metrolist KMP is in early access. Features may be broken, incomplete, or change without notice.</string>
-    <string name="kmp_upgrade_action">Upgrade to KMP</string>
-    <string name="kmp_upgrade_later">Not now</string>
 
     <!-- Offload -->
     <string name="audio_offload">Enable audio offload</string>

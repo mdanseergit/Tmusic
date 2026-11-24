@@ -7,8 +7,6 @@ package com.metrolist.music
 
 import android.app.ActivityManager
 import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.Process
@@ -182,17 +180,6 @@ class App :
         }
 
         YouTube.useLoginForBrowse = settings[UseLoginForBrowse] ?: true
-
-        val channel =
-            NotificationChannel(
-                "updates",
-                getString(R.string.update_channel_name),
-                NotificationManager.IMPORTANCE_DEFAULT,
-            ).apply {
-                description = getString(R.string.update_channel_desc)
-            }
-        val nm = getSystemService(NotificationManager::class.java)
-        nm.createNotificationChannel(channel)
     }
 
     private fun observeSettingsChanges() {

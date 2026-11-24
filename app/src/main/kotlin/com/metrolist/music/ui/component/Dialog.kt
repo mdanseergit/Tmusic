@@ -139,7 +139,6 @@ fun DefaultDialog(
 @Composable
 fun AccountSettingsDialog(
     onDismiss: () -> Unit,
-    latestVersionName: String,
 ) {
     val navController = LocalNavController.current
     Dialog(
@@ -174,7 +173,6 @@ fun AccountSettingsDialog(
                 AccountSettings(
                     navController = navController,
                     onClose = onDismiss,
-                    latestVersionName = latestVersionName,
                 )
             }
         }

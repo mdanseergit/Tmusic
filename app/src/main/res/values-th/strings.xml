@@ -265,7 +265,6 @@
     <string name="preview">ตัวอย่าง</string>
     <string name="about">เกี่ยวกับ</string>
     <string name="app_version">เวอร์ชันแอป</string>
-    <string name="new_version_available">มีเวอร์ชันใหม่พร้อมใช้งาน</string>
     <string name="translation_models">โมเดลการแปล</string>
     <string name="clear_translation_models">ล้างโมเดลการแปล</string>
 </resources>

@@ -146,22 +146,6 @@
     <string name="not_logged_in_youtube">Non iniciaches sesión en YouTube</string>
     <string name="default_links">Abrir ligazóns permitidas</string>
     <string name="open_app_settings_error">Non se puideron abrir os axustes da aplicación</string>
-    <string name="release_notes">Notas da versión</string>
-    <string name="changelog">Rexistro de cambios</string>
-    <string name="changelog_empty">Rexistro de cambios non dispoñible</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
-    <string name="list_bullet">•</string>
-    <string name="view_on_github">Ver no GitHub</string>
-    <string name="current_version">Versión actual</string>
-    <string name="version_format">Versión: %s</string>
-    <string name="update_settings">Axustes de actualización</string>
-    <string name="check_for_updates_title">Comprobar se hai actualizacións</string>
-    <string name="checking_for_updates">Comprobando se hai actualizacións…</string>
-    <string name="latest_version_format">Última: %s</string>
-    <string name="check_for_updates_button">Comprobar se hai actualizacións</string>
-    <string name="hide_changelog">Agochar rexistro de cambios</string>
-    <string name="view_changelog">Ver rexistro de cambios</string>
-    <string name="failed_to_check_updates">Houbo un fallo ao comprobar se hai actualizacións: %s</string>
     <string name="all_time">De todos os tempos</string>
     <string name="past_24_hours">Últimas 24 horas</string>
     <string name="past_week">Última semana</string>
@@ -180,9 +164,6 @@
     <string name="crossfade_gapless_desc">Saltar a transición suave para álbums deseñados para reproducirse sen pausas entre cancións</string>
     <string name="lyrics_romanize_title">Romanización</string>
     <string name="lyrics_romanization">Romanización das letras</string>
-    <string name="update_available_title">Actualización dispoñible</string>
-    <string name="update_channel_name">Actualizacións da aplicación</string>
-    <string name="update_channel_desc">Notificacións sobre novas versións da aplicación</string>
     <string name="audio_offload">Activar descarga de audio</string>
     <string name="audio_offload_description">Usar a ruta de descarga de audio para a súa reprodución. Desactivar isto pode aumentar o uso da batería, pero pode axudar no caso de experimentar problemas coa reprodución ou o procesamento posterior do audio</string>
     <string name="audio_offload_disabled_by_crossfade">Desactivado porque a transición suave está activada</string>
@@ -614,9 +595,6 @@
     <string name="settings_section_player_content">Reprodutor e contido</string>
     <string name="settings_section_storage">Almacenamento e datos</string>
     <string name="settings_section_system">Sistema e sobre</string>
-    <string name="updater">Actualizador</string>
-    <string name="check_for_updates">Procurar actualizacións automaticamente</string>
-    <string name="update_notifications">Activar notificacións de actualización</string>
     <string name="varispeed_description">Vincular o ton á velocidade de reprodución, creando un efecto de aceleración e desaceleración ao estilo dun casete</string>
     <string name="audio_track_playback_params">Usar procesamento de audio por soporte físico</string>
     <string name="audio_track_playback_params_description">Usar o AudioTrack de Android para os cambios de velocidade/ton en lugar do procesamento por soporte lóxico. Máis fiable para valores extremos de ton</string>
@@ -842,11 +820,7 @@
     <string name="enable_dynamic_icon">Cores dinámicas das iconas</string>
     <string name="enable_dynamic_icon_desc">Empregar cores dinámicas do tema para a icona da aplicación. Cando está desactivado, a icona utiliza cores sólidas.</string>
     <string name="playlist_unavailable">Lista de reprodución non dispoñible</string>
-    <string name="kmp_upgrade_title">Metrolist KMP %s está dispoñible</string>
-    <string name="kmp_upgrade_warning">Metrolist KMP está en acceso anticipado. As funcións poden estar defectuosas, incompletas ou cambiar sen previo aviso.</string>
-    <string name="kmp_upgrade_later">Non agora</string>
     <string name="android_auto_search_options">Opcións de busca</string>
     <string name="android_auto_search_local_songs_limit">Límite de procura de cancións</string>
-    <string name="kmp_upgrade_action">Actualiza a KMP</string>
     <string name="android_auto_search_local_songs_limit_desc">Limita o número de cancións locais que se amosan nos resultados da busca. Recoméndase non establecelo como ilimitado para evitar fallos de memoria</string>
 </resources>

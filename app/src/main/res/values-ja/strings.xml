@@ -262,7 +262,6 @@
     <string name="action_logout">ログアウト</string>
     <string name="about">アプリについて</string>
     <string name="app_version">アプリのバージョン</string>
-    <string name="new_version_available">アップデートがあります</string>
     <string name="translation_models">翻訳モデル</string>
     <string name="clear_translation_models">翻訳モデルを削除</string>
     <string name="use_login_for_browse_desc">例えば、Premiumのアカウントでログインしたときに、Premium限定のアルバムが表示されるようになります。</string>

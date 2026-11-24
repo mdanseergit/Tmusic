@@ -168,7 +168,6 @@
     <string name="options">Innstillinger</string>
     <string name="login_failed">Innlogging mislyktes</string>
     <string name="app_version">Programversjon</string>
-    <string name="new_version_available">Ny versjon tilgjengelig</string>
     <string name="translation_models">Oversettingsmodeller</string>
     <string name="clear_translation_models">Fjern oversettingsmodeller</string>
     <plurals name="n_week">

@@ -103,7 +103,6 @@
     <string name="not_logged_in_youtube">Nie ste prihlásený/á na YouTube</string>
     <string name="default_links">Otvoriť podporované odkazy</string>
     <string name="open_app_settings_error">Nastavenia aplikácie sa nepodarilo otvoriť</string>
-    <string name="release_notes">Poznámky k vydaniu</string>
     <string name="all_time">Vždy</string>
     <string name="past_24_hours">Posledných 24 hodín</string>
     <string name="past_week">Minulý týždeň</string>
@@ -147,12 +146,6 @@
     <string name="edit_playlist_cover_note_wait">Po výbere obrázka chvíľu počkajte, kým sa nový obal zobrazí vo vašom zozname skladieb.</string>
     <string name="choose_from_library">Vyberte si z knižnice</string>
     <string name="remove_custom_image">Odstrániť vlastný obrázok</string>
-    <string name="updater">Aktualizátor</string>
-    <string name="check_for_updates">Automaticky kontrolovať aktualizácie</string>
-    <string name="update_notifications">Povoliť upozornenia na aktualizácie</string>
-    <string name="update_available_title">Aktualizácia je k dispozícii</string>
-    <string name="update_channel_name">Aktualizácie aplikácií</string>
-    <string name="update_channel_desc">Upozornenia na nové verzie</string>
     <string name="audio_offload">Povoliť odľahčenie</string>
     <string name="audio_offload_description">Na prehrávanie zvuku použite cestu pre odľahčenie zvuku. Zakázanie tejto funkcie môže zvýšiť spotrebu energie, ale môže byť užitočné, ak máte problémy s prehrávaním zvuku alebo následným spracovaním</string>
     <string name="swipe_song_to_remove">Prejdením prstom odstráňte skladbu zo zoznamu skladieb</string>
@@ -297,7 +290,6 @@
     <string name="metrolist">METROLIST</string>
     <string name="upload_songs">Nahrať skladby</string>
     <string name="turntable_widget_description">Kruhový hudobný widget s ovládacími prvkami pre prehrávanie a označenie „Páči sa mi“</string>
-    <string name="view_changelog">Zobraziť zoznam zmien</string>
     <string name="error_title">Chyba</string>
     <string name="import_error_title">Chyba pri importe</string>
     <string name="restart">Reštartovať</string>

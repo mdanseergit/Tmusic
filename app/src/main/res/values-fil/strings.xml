@@ -270,7 +270,6 @@
     <string name="preview">Pasilip</string>
     <string name="about">Tungkol sa</string>
     <string name="app_version">Bersyon ng aplikasyon</string>
-    <string name="new_version_available">Magagamit ang bagong bersyon</string>
     <string name="translation_models">Mga Modelo ng Pagsasalin</string>
     <string name="clear_translation_models">Alisin ang mga modelo ng pagsasalin</string>
 </resources>

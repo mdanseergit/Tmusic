@@ -92,7 +92,6 @@
     <string name="not_logged_in_youtube">Niezalogowany do YouTube</string>
     <string name="default_links">Otwórz obsługiwane linki</string>
     <string name="open_app_settings_error">Nie można otworzyć ustawień aplikacji</string>
-    <string name="release_notes">Informacje o wersji</string>
     <string name="history_duration">Czas trwania historii</string>
     <string name="dislikes">Dislajki</string>
     <plurals name="seconds">
@@ -149,11 +148,6 @@
     <string name="uploaded_playlist">Przesłane</string>
     <string name="filter_uploaded">Przesłane</string>
     <string name="show_uploaded_playlist">Pokaż playlistę \"Przesłane\"</string>
-    <string name="updater">Aktualizacje</string>
-    <string name="check_for_updates">Automatycznie sprawdzaj dostępność aktualizacji</string>
-    <string name="update_notifications">Włącz powiadomienia o aktualizacjach</string>
-    <string name="update_available_title">Aktualizacja dostępna</string>
-    <string name="update_channel_desc">Powiadomienia o nowych wersjach</string>
     <string name="integrations">Integracje</string>
     <string name="username">Nazwa użytkownika</string>
     <string name="password">Hasło</string>
@@ -165,7 +159,6 @@
     <string name="tertiary_color_style">Kolor trzeciorzędny</string>
     <string name="swipe_song_to_remove">Przesuń, aby usunąć utwór z listy odtwarzania</string>
     <string name="auto_scroll">Ponowna synchronizacja</string>
-    <string name="update_channel_name">Aktualizacje aplikacji</string>
     <string name="google_cast">Google Cast</string>
     <string name="google_cast_description">Włącz przesyłanie dźwięku do Chromecasta i innych urządzeń obsługujących Cast</string>
     <string name="last_fm_send_likes">Wyślij polubienia/niepolubienia</string>
@@ -357,19 +350,6 @@
     <string name="listen_together_suggestion_sent">Sugestia została wysłana do hosta!</string>
     <string name="listen_together_join_request_notification">%1$s chce dołączyć do pokoju</string>
     <string name="listen_together_notification_channel_name">Słuchaj razem</string>
-    <string name="changelog">Lista zmian</string>
-    <string name="changelog_empty">Brak dostępnych dzienników zmian</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
-    <string name="view_on_github">Zobacz na GitHubie</string>
-    <string name="current_version">Obecna wersja</string>
-    <string name="version_format">Wersja: %s</string>
-    <string name="update_settings">Zaktualizuj ustawienia</string>
-    <string name="check_for_updates_title">Sprawdź dostępność aktualizacji</string>
-    <string name="checking_for_updates">Sprawdzanie dostępności aktualizacji…</string>
-    <string name="check_for_updates_button">Sprawdź dostępność aktualizacji</string>
-    <string name="hide_changelog">Ukryj dziennik zmian</string>
-    <string name="view_changelog">Pokaż dziennik zmian</string>
-    <string name="failed_to_check_updates">Nie udało się sprawdzić dostępności aktualizacji: %s</string>
     <string name="set_as_default">Ustaw jako domyślny</string>
     <string name="sleep_timer_default_set">Wyłącznik czasowy domyślnie ustawiony na %d min</string>
     <string name="enable_automatic_sleeptimer">Uruchom automatyczny wyłącznik czasowy</string>
@@ -402,8 +382,6 @@
     <string name="export_failed">Nie udało się wyeksportować playlisty</string>
     <string name="export_option_share">Udostępnij</string>
     <string name="export_option_save">Zapisz w Dokumentach</string>
-    <string name="list_bullet">•</string>
-    <string name="latest_version_format">Najnowsza: %s</string>
     <string name="sleeptimer_description">Automatycznie włącza wyłącznik czasowy z domyślną wartością o niestandardowym czasie</string>
     <string name="sleep_timer_repeat_description">Ustaw niestandardową godzinę, o której wyłącznik czasowy powinien się automatycznie aktywować</string>
     <string name="sleep_timer_custom">Niestandardowy</string>
